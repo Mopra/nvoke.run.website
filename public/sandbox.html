@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>nvoke sandbox</title>
+</head>
+<body>
+<script>
+(function () {
+  'use strict';
+  function send(msg) { parent.postMessage(msg, '*'); }
+  addEventListener('message', async function (e) {
+    var data = e.data || {};
+    if (typeof data.id !== 'string' || typeof data.code !== 'string') return;
+    var started = performance.now();
+    try {
+      var fn = (0, eval)('(' + data.code + ')');
+      if (typeof fn !== 'function') throw new Error('Export is not a function');
+      var value = await Promise.resolve(fn(data.req));
+      var serialized = JSON.stringify(value);
+      if (serialized === undefined) throw new Error('Return value is not JSON-serializable');
+      send({ id: data.id, ok: true, value: serialized, ms: Math.round(performance.now() - started) });
+    } catch (err) {
+      var message = (err && err.message) ? String(err.message) : String(err);
+      send({ id: data.id, ok: false, error: message, ms: Math.round(performance.now() - started) });
+    }
+  });
+  send({ ready: true });
+})();
+</script>
+</body>
+</html>
