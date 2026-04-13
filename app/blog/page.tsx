@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { getAllPosts } from '@/lib/blog';
 import { buildMetadata } from '@/lib/seo';
+import { JsonLd } from '@/components/site/json-ld';
+import { siteConfig } from '@/lib/site';
 
 export const metadata = buildMetadata({
   title: 'Blog',
@@ -20,6 +22,14 @@ export default function BlogIndexPage() {
 
   return (
     <div className="mx-auto max-w-2xl px-6 py-20">
+      <JsonLd
+        data={{
+          '@context': 'https://schema.org',
+          '@type': 'Blog',
+          name: `${siteConfig.name} blog`,
+          url: `${siteConfig.url}/blog`
+        }}
+      />
       <header>
         <h1 className="text-4xl font-semibold tracking-tight text-foreground">Blog</h1>
         <p className="mt-3 text-muted-foreground">Writing from the nvoke team.</p>

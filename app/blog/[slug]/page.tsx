@@ -5,6 +5,8 @@ import { getAllSlugs, getPostBySlug } from '@/lib/blog';
 import { Callout } from '@/components/mdx/callout';
 import { CodeBlock } from '@/components/mdx/code-block';
 import { buildMetadata } from '@/lib/seo';
+import { JsonLd } from '@/components/site/json-ld';
+import { siteConfig } from '@/lib/site';
 
 export const revalidate = 3600;
 
@@ -53,6 +55,19 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
   return (
     <article className="mx-auto max-w-2xl px-6 py-20">
+      <JsonLd
+        data={{
+          '@context': 'https://schema.org',
+          '@type': 'BlogPosting',
+          headline: post.frontmatter.title,
+          description: post.frontmatter.description,
+          datePublished: post.frontmatter.date.toISOString(),
+          dateModified: post.frontmatter.date.toISOString(),
+          author: { '@type': 'Organization', name: siteConfig.name },
+          image: `${siteConfig.url}/og?title=${encodeURIComponent(post.frontmatter.title)}&kind=post`,
+          url: `${siteConfig.url}/blog/${post.slug}`
+        }}
+      />
       <header className="mb-10">
         <time className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
           {formatDate(post.frontmatter.date)}
