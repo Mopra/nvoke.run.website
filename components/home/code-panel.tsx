@@ -1,5 +1,6 @@
 import {
   EXAMPLE_CODE,
+  EXAMPLE_REQ,
   OUTPUT_BODY,
   OUTPUT_METHOD,
   OUTPUT_STATUS,
@@ -13,6 +14,7 @@ export async function CodePanel() {
     <CodePanelClient
       highlightedHtml={highlightedHtml}
       plainCode={EXAMPLE_CODE}
+      exampleReq={EXAMPLE_REQ}
       outputMethod={OUTPUT_METHOD}
       outputStatus={OUTPUT_STATUS}
       outputBody={OUTPUT_BODY}
