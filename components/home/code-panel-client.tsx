@@ -72,9 +72,7 @@ export function CodePanelClient({
       return;
     }
     const t = setTimeout(() => {
-      if (document.visibilityState === 'visible') {
-        setTypedChars((c) => c + 1);
-      }
+      setTypedChars((c) => c + 1);
     }, TYPE_SPEED_MS);
     return () => clearTimeout(t);
   }, [phase, typedChars, plainCode.length]);
@@ -125,7 +123,7 @@ export function CodePanelClient({
       </div>
 
       {/* Code region — either full Shiki HTML (when done) or partial plain text (while typing) */}
-      <div className="overflow-x-auto bg-card px-5 py-5 font-mono text-sm [&_pre]:!bg-transparent">
+      <div className="min-h-[7rem] overflow-x-auto bg-card px-5 py-5 font-mono text-sm [&_pre]:!bg-transparent">
         {showFullCode ? (
           <div dangerouslySetInnerHTML={{ __html: highlightedHtml }} />
         ) : (
@@ -147,7 +145,7 @@ export function CodePanelClient({
 
       {/* Output region — reserves height at all times (prevents CLS) */}
       <div
-        className="min-h-[5.25rem] space-y-1 border-t border-border bg-panel-output px-5 py-4 font-mono text-xs text-muted-foreground transition-opacity duration-300"
+        className="min-h-[5.5rem] space-y-1 border-t border-border bg-panel-output px-5 py-4 font-mono text-xs text-muted-foreground transition-opacity duration-300"
         style={{ opacity: outputVisible ? 1 : 0 }}
         aria-live="off"
       >
