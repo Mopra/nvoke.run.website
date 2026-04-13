@@ -11,16 +11,16 @@ export function Footer() {
           <span>A quiet place to run code. © {new Date().getFullYear()} nvoke.</span>
         </div>
         <nav className="flex flex-wrap items-center gap-x-6 gap-y-2">
-          <Link href="/blog" className="hover:text-foreground">
+          <Link href="/blog" className="hover:text-foreground transition-colors">
             Blog
           </Link>
-          <Link href="/pricing" className="hover:text-foreground">
+          <Link href="/pricing" className="hover:text-foreground transition-colors">
             Pricing
           </Link>
-          <a href={siteConfig.appUrl} className="hover:text-foreground">
+          <a href={siteConfig.appUrl} className="hover:text-foreground transition-colors">
             Open app
           </a>
-          <a href={siteConfig.links.github} className="hover:text-foreground">
+          <a href={siteConfig.links.github} className="hover:text-foreground transition-colors">
             GitHub
           </a>
         </nav>
