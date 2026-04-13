@@ -38,8 +38,10 @@ export default function PricingPage() {
   return (
     <>
       <section className="mx-auto max-w-3xl px-6 pt-20 pb-12 text-center">
-        <h1 className="text-5xl font-semibold tracking-tight text-foreground">Pay for what you run.</h1>
-        <p className="mt-4 text-lg text-muted-foreground">
+        <h1 className="text-foreground text-5xl font-semibold tracking-tight">
+          Pay for what you run.
+        </h1>
+        <p className="text-muted-foreground mt-4 text-lg">
           Every plan includes the full product. Only the ceiling changes.
         </p>
       </section>
@@ -53,7 +55,7 @@ export default function PricingPage() {
       </section>
 
       <section className="mx-auto mt-16 max-w-3xl px-6 text-center">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-muted-foreground text-sm">
           Every plan includes: the editor, real HTTPS endpoints, API keys, 30-second execution
           timeout, 128 MB heap, logs, and whatever we ship next week.
         </p>

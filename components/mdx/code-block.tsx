@@ -9,9 +9,9 @@ type Props = {
 export async function CodeBlock({ children, language = 'javascript', title }: Props) {
   const html = await codeToHtml(children.trim(), { lang: language, theme: 'vesper' });
   return (
-    <figure className="my-6 overflow-hidden rounded-lg border border-border bg-card">
+    <figure className="border-border bg-card my-6 overflow-hidden rounded-lg border">
       {title && (
-        <figcaption className="border-b border-border px-4 py-2 font-mono text-xs text-muted-foreground">
+        <figcaption className="border-border text-muted-foreground border-b px-4 py-2 font-mono text-xs">
           {title}
         </figcaption>
       )}

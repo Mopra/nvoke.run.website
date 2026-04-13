@@ -112,11 +112,7 @@
     inset: 0;
     pointer-events: none;
     z-index: 0;
-    background: radial-gradient(
-      ellipse 80% 60% at 50% 0%,
-      oklch(0.19 0.012 80),
-      transparent 70%
-    );
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, oklch(0.19 0.012 80), transparent 70%);
   }
 
   /* Subtle grain overlay — inline SVG noise at ~3% opacity */

@@ -5,7 +5,7 @@ import { siteConfig } from '@/lib/site';
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-background/80 backdrop-blur-md">
+    <header className="border-border/50 bg-background/80 sticky top-0 z-50 w-full border-b backdrop-blur-md">
       <div className="mx-auto flex h-14 max-w-5xl items-center justify-between px-6">
         <Logo />
         <nav className="flex items-center gap-1 text-sm">
@@ -13,7 +13,7 @@ export function Header() {
             <Link
               key={item.href}
               href={item.href}
-              className="rounded-md px-3 py-1.5 text-muted-foreground transition-colors hover:text-foreground"
+              className="text-muted-foreground hover:text-foreground rounded-md px-3 py-1.5 transition-colors"
             >
               {item.label}
             </Link>

@@ -20,12 +20,12 @@ const FAQ = [
 export function PricingFaq() {
   return (
     <section className="mx-auto mt-24 max-w-3xl px-6">
-      <h2 className="text-2xl font-semibold tracking-tight text-foreground">Questions</h2>
+      <h2 className="text-foreground text-2xl font-semibold tracking-tight">Questions</h2>
       <div className="mt-8 space-y-8">
         {FAQ.map((item) => (
           <div key={item.q}>
-            <h3 className="font-semibold text-foreground">{item.q}</h3>
-            <p className="mt-2 text-muted-foreground">{item.a}</p>
+            <h3 className="text-foreground font-semibold">{item.q}</h3>
+            <p className="text-muted-foreground mt-2">{item.a}</p>
           </div>
         ))}
       </div>

@@ -6,7 +6,7 @@ export function Logo({ className }: { className?: string }) {
     <Link
       href="/"
       className={cn(
-        'font-mono text-base font-semibold tracking-tight text-foreground',
+        'text-foreground font-mono text-base font-semibold tracking-tight',
         'transition-opacity hover:opacity-80',
         className
       )}

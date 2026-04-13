@@ -69,21 +69,21 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         }}
       />
       <header className="mb-10">
-        <time className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
+        <time className="text-muted-foreground font-mono text-xs tracking-wider uppercase">
           {formatDate(post.frontmatter.date)}
         </time>
-        <h1 className="mt-3 text-4xl font-semibold leading-tight tracking-tight text-foreground">
+        <h1 className="text-foreground mt-3 text-4xl leading-tight font-semibold tracking-tight">
           {post.frontmatter.title}
         </h1>
-        <p className="mt-3 text-lg text-muted-foreground">{post.frontmatter.description}</p>
+        <p className="text-muted-foreground mt-3 text-lg">{post.frontmatter.description}</p>
       </header>
 
       <div className="prose">
         <MDXRemote source={post.content} components={components} />
       </div>
 
-      <footer className="mt-16 border-t border-border pt-8">
-        <Link href="/blog" className="text-sm text-muted-foreground hover:text-foreground">
+      <footer className="border-border mt-16 border-t pt-8">
+        <Link href="/blog" className="text-muted-foreground hover:text-foreground text-sm">
           ← Back to blog
         </Link>
       </footer>

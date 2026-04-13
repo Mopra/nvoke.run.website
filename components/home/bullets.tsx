@@ -19,8 +19,8 @@ export function Bullets() {
       <ul className="grid gap-8 sm:grid-cols-3">
         {BULLETS.map((b) => (
           <li key={b.title}>
-            <h3 className="font-semibold text-foreground">{b.title}</h3>
-            <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{b.body}</p>
+            <h3 className="text-foreground font-semibold">{b.title}</h3>
+            <p className="text-muted-foreground mt-1 text-sm leading-relaxed">{b.body}</p>
           </li>
         ))}
       </ul>

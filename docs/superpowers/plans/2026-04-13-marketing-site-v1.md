@@ -25,6 +25,7 @@
 ### Task 1: Initialize Next.js project files
 
 **Files:**
+
 - Create: `package.json`
 - Create: `tsconfig.json`
 - Create: `next.config.mjs`
@@ -220,7 +221,7 @@ content
 
 - [ ] **Step 10: Write `README.md`**
 
-```markdown
+````markdown
 # nvoke.run website
 
 Marketing site + blog for [nvoke](https://app.nvoke.run) — a minimal tool for writing, running, and managing small Node.js functions.
@@ -235,6 +236,7 @@ Next.js 15 · React 19 · TypeScript · Tailwind v4 · shadcn/ui · MDX · Verce
 npm install
 npm run dev
 ```
+````
 
 Open http://localhost:3000.
 
@@ -249,13 +251,14 @@ Open http://localhost:3000.
 ## Design spec
 
 See `docs/superpowers/specs/2026-04-13-marketing-site-v1-design.md`.
-```
+
+````
 
 - [ ] **Step 11: Install dependencies**
 
 ```bash
 npm install
-```
+````
 
 Expected: installs without errors. `package-lock.json` created. `node_modules/` populated. No peer-dependency errors (warnings are OK).
 
@@ -271,6 +274,7 @@ git commit -m "chore: scaffold Next.js 15 + TypeScript strict"
 ### Task 2: Minimal app shell (root layout + placeholder home)
 
 **Files:**
+
 - Create: `app/layout.tsx`
 - Create: `app/page.tsx`
 - Create: `app/globals.css`
@@ -282,7 +286,10 @@ html,
 body {
   margin: 0;
   padding: 0;
-  font-family: system-ui, -apple-system, sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
   background: #1a1814;
   color: #f2efe8;
 }
@@ -357,6 +364,7 @@ git commit -m "feat: minimal app shell with placeholder home"
 ### Task 3: Tailwind v4 + warm neutral + sage token system
 
 **Files:**
+
 - Modify: `package.json` (add Tailwind v4)
 - Create: `postcss.config.mjs`
 - Modify: `app/globals.css` (full token system)
@@ -494,11 +502,7 @@ export default config;
     inset: 0;
     pointer-events: none;
     z-index: 0;
-    background: radial-gradient(
-      ellipse 80% 60% at 50% 0%,
-      oklch(0.19 0.012 80),
-      transparent 70%
-    );
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, oklch(0.19 0.012 80), transparent 70%);
   }
 
   /* Subtle grain overlay — inline SVG noise at ~3% opacity */
@@ -540,7 +544,7 @@ export default function HomePage() {
   return (
     <main className="mx-auto max-w-4xl px-6 py-16">
       <h1 className="text-4xl font-semibold tracking-tight">nvoke</h1>
-      <p className="mt-4 text-muted-foreground">Tailwind v4 + warm tokens loaded.</p>
+      <p className="text-muted-foreground mt-4">Tailwind v4 + warm tokens loaded.</p>
     </main>
   );
 }
@@ -561,6 +565,7 @@ npm run dev
 ```
 
 Open http://localhost:3000. Expected:
+
 - Warm dark background (not pure black — slightly brown)
 - Very subtle radial gradient brighter near the top
 - Barely-visible grain texture overlay
@@ -589,6 +594,7 @@ git commit -m "feat: Tailwind v4 with warm neutral + sage token system"
 ### Task 4: Fonts — Geist Sans & Geist Mono
 
 **Files:**
+
 - Modify: `package.json` (add `geist`)
 - Modify: `app/layout.tsx`
 - Modify: `app/globals.css` (map font variables into @theme)
@@ -626,8 +632,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 Find the `@theme inline {` block in `app/globals.css`. Add these lines at the end of the block, just before the closing `}`:
 
 ```css
-  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
+--font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+--font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
 ```
 
 - [ ] **Step 4: Run typecheck**
@@ -654,6 +660,7 @@ git commit -m "feat: load Geist Sans and Geist Mono via next/font"
 ### Task 5: Site config + utility helpers
 
 **Files:**
+
 - Create: `lib/site.ts`
 - Create: `lib/utils.ts`
 - Create: `lib/seo.ts`
@@ -720,7 +727,9 @@ export function buildMetadata({
   publishedTime
 }: BuildMetadataInput = {}): Metadata {
   const url = `${siteConfig.url}${path}`;
-  const fullTitle = title ? `${title} — ${siteConfig.name}` : `${siteConfig.name} — write a function, invoke it`;
+  const fullTitle = title
+    ? `${title} — ${siteConfig.name}`
+    : `${siteConfig.name} — write a function, invoke it`;
   const ogImage = `${siteConfig.url}/og?title=${encodeURIComponent(title ?? siteConfig.name)}&kind=${type === 'article' ? 'post' : 'page'}`;
 
   return {
@@ -768,6 +777,7 @@ git commit -m "feat: site config, cn util, and SEO metadata helper"
 ### Task 6: shadcn Button primitive
 
 **Files:**
+
 - Create: `components/ui/button.tsx`
 
 Install shadcn's Button directly (without running `shadcn` CLI, to avoid a canary-version mismatch dance). Button is the only shadcn primitive needed for v1.
@@ -810,15 +820,16 @@ const buttonVariants = cva(
 );
 
 export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
   asChild?: boolean;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : 'button';
-    return <Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props} />;
+    return (
+      <Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props} />
+    );
   }
 );
 Button.displayName = 'Button';
@@ -846,6 +857,7 @@ git commit -m "feat: add shadcn Button primitive"
 ### Task 7: Logo, Header, Footer components
 
 **Files:**
+
 - Create: `components/site/logo.tsx`
 - Create: `components/site/header.tsx`
 - Create: `components/site/footer.tsx`
@@ -861,7 +873,7 @@ export function Logo({ className }: { className?: string }) {
     <Link
       href="/"
       className={cn(
-        'font-mono text-base font-semibold tracking-tight text-foreground',
+        'text-foreground font-mono text-base font-semibold tracking-tight',
         'transition-opacity hover:opacity-80',
         className
       )}
@@ -882,7 +894,7 @@ import { siteConfig } from '@/lib/site';
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-background/80 backdrop-blur-md">
+    <header className="border-border/50 bg-background/80 sticky top-0 z-50 w-full border-b backdrop-blur-md">
       <div className="mx-auto flex h-14 max-w-5xl items-center justify-between px-6">
         <Logo />
         <nav className="flex items-center gap-1 text-sm">
@@ -890,7 +902,7 @@ export function Header() {
             <Link
               key={item.href}
               href={item.href}
-              className="rounded-md px-3 py-1.5 text-muted-foreground transition-colors hover:text-foreground"
+              className="text-muted-foreground hover:text-foreground rounded-md px-3 py-1.5 transition-colors"
             >
               {item.label}
             </Link>
@@ -916,8 +928,8 @@ import { siteConfig } from '@/lib/site';
 
 export function Footer() {
   return (
-    <footer className="mt-24 border-t border-border/50 bg-footer">
-      <div className="mx-auto flex max-w-5xl flex-col gap-4 px-6 py-10 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
+    <footer className="border-border/50 bg-footer mt-24 border-t">
+      <div className="text-muted-foreground mx-auto flex max-w-5xl flex-col gap-4 px-6 py-10 text-sm sm:flex-row sm:items-center sm:justify-between">
         <div className="flex flex-col gap-1">
           <Logo />
           <span>A quiet place to run code. © {new Date().getFullYear()} nvoke.</span>
@@ -962,6 +974,7 @@ git commit -m "feat: site logo, header, and footer components"
 ### Task 8: Marketing route group with shared layout
 
 **Files:**
+
 - Create: `app/(marketing)/layout.tsx`
 - Move: `app/page.tsx` → `app/(marketing)/page.tsx` (and replace with a real hero-less placeholder for now)
 
@@ -999,7 +1012,7 @@ export default function HomePage() {
   return (
     <div className="mx-auto max-w-5xl px-6 py-24">
       <h1 className="text-5xl font-semibold tracking-tight">nvoke</h1>
-      <p className="mt-4 max-w-xl text-lg text-muted-foreground">
+      <p className="text-muted-foreground mt-4 max-w-xl text-lg">
         Route group working. Header, footer, tokens loaded.
       </p>
     </div>
@@ -1018,6 +1031,7 @@ Expected: no errors.
 - [ ] **Step 5: Run dev server and visually verify**
 
 Open http://localhost:3000. Expected:
+
 - Sticky header at top with "nvoke" wordmark on the left, "Blog" · "Pricing" · "Open app →" on the right
 - Main content area
 - Footer at the bottom in a slightly darker shade than the body
@@ -1039,6 +1053,7 @@ git commit -m "feat: marketing route group with header + footer layout"
 ### Task 9: Home hero section
 
 **Files:**
+
 - Create: `components/home/hero.tsx`
 - Modify: `app/(marketing)/page.tsx`
 
@@ -1052,15 +1067,15 @@ import { siteConfig } from '@/lib/site';
 export function Hero() {
   return (
     <section className="mx-auto max-w-3xl px-6 pt-20 pb-12 sm:pt-28">
-      <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/5 px-3 py-1 font-mono text-xs text-primary">
+      <p className="border-primary/30 bg-primary/5 text-primary mb-6 inline-flex items-center gap-2 rounded-full border px-3 py-1 font-mono text-xs">
         Developer tool
       </p>
-      <h1 className="text-5xl font-semibold leading-[1.05] tracking-tight text-foreground sm:text-6xl">
+      <h1 className="text-foreground text-5xl leading-[1.05] font-semibold tracking-tight sm:text-6xl">
         Write a function. Invoke it.
         <br />
         <span className="text-muted-foreground">That is the whole tool.</span>
       </h1>
-      <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
+      <p className="text-muted-foreground mt-6 max-w-xl text-lg leading-relaxed">
         nvoke runs small Node.js functions with a real HTTP endpoint. No YAML, no cold-start
         rituals, no dashboard tour.
       </p>
@@ -1121,9 +1136,10 @@ git commit -m "feat: home page hero section"
 
 ### Task 10: Code panel — static SSR version
 
-This task builds the code panel *without* animation. Shiki highlights the example at build time. Next task layers on the client-side typing animation.
+This task builds the code panel _without_ animation. Shiki highlights the example at build time. Next task layers on the client-side typing animation.
 
 **Files:**
+
 - Modify: `package.json` (add `shiki`)
 - Create: `components/home/code-panel-static.tsx`
 - Create: `components/home/code-panel.tsx` (server wrapper for now; will get client child in Task 11)
@@ -1157,32 +1173,32 @@ export async function CodePanelStatic() {
 
   return (
     <figure
-      className="mx-auto my-12 max-w-3xl overflow-hidden rounded-xl border border-border bg-card shadow-[0_1px_0_0_oklch(0.3_0.008_80)_inset]"
+      className="border-border bg-card mx-auto my-12 max-w-3xl overflow-hidden rounded-xl border shadow-[0_1px_0_0_oklch(0.3_0.008_80)_inset]"
       aria-label="Example nvoke function"
     >
       {/* Chrome bar */}
-      <div className="flex items-center gap-2 border-b border-border px-4 py-2.5">
+      <div className="border-border flex items-center gap-2 border-b px-4 py-2.5">
         <div className="flex gap-1.5">
-          <span className="h-2.5 w-2.5 rounded-full bg-border" />
-          <span className="h-2.5 w-2.5 rounded-full bg-border" />
-          <span className="h-2.5 w-2.5 rounded-full bg-border" />
+          <span className="bg-border h-2.5 w-2.5 rounded-full" />
+          <span className="bg-border h-2.5 w-2.5 rounded-full" />
+          <span className="bg-border h-2.5 w-2.5 rounded-full" />
         </div>
-        <span className="ml-2 font-mono text-xs text-muted-foreground">hello.js</span>
+        <span className="text-muted-foreground ml-2 font-mono text-xs">hello.js</span>
       </div>
 
       {/* Code region */}
       <div
-        className="overflow-x-auto bg-card px-5 py-5 font-mono text-sm [&_pre]:!bg-transparent"
+        className="bg-card overflow-x-auto px-5 py-5 font-mono text-sm [&_pre]:!bg-transparent"
         dangerouslySetInnerHTML={{ __html: html }}
       />
 
       {/* Action bar */}
-      <div className="flex items-center justify-end border-t border-border px-4 py-2.5">
+      <div className="border-border flex items-center justify-end border-t px-4 py-2.5">
         <button
           type="button"
           aria-hidden="true"
           tabIndex={-1}
-          className="pointer-events-none rounded-md border border-primary/30 bg-primary/10 px-3 py-1 font-mono text-xs text-primary"
+          className="border-primary/30 bg-primary/10 text-primary pointer-events-none rounded-md border px-3 py-1 font-mono text-xs"
         >
           Run ▸
         </button>
@@ -1190,7 +1206,7 @@ export async function CodePanelStatic() {
 
       {/* Output region */}
       <div
-        className="space-y-1 border-t border-border bg-panel-output px-5 py-4 font-mono text-xs text-muted-foreground"
+        className="border-border bg-panel-output text-muted-foreground space-y-1 border-t px-5 py-4 font-mono text-xs"
         aria-live="off"
       >
         <div>{OUTPUT_METHOD}</div>
@@ -1261,6 +1277,7 @@ git commit -m "feat: static SSR code panel with Shiki highlighting"
 Wrap the highlighted code in a client component that replays it character-by-character on first scroll into view. Output region also fades in after a pause.
 
 **Files:**
+
 - Create: `components/home/code-panel-client.tsx`
 - Modify: `components/home/code-panel-static.tsx` (split — extract pre-highlighted HTML + pass to client)
 - Modify: `components/home/code-panel.tsx` (compose server + client)
@@ -1407,21 +1424,21 @@ export function CodePanelClient({
   return (
     <figure
       ref={containerRef}
-      className="mx-auto my-12 max-w-3xl overflow-hidden rounded-xl border border-border bg-card"
+      className="border-border bg-card mx-auto my-12 max-w-3xl overflow-hidden rounded-xl border"
       aria-label="Example nvoke function"
     >
       {/* Chrome bar */}
-      <div className="flex items-center gap-2 border-b border-border px-4 py-2.5">
+      <div className="border-border flex items-center gap-2 border-b px-4 py-2.5">
         <div className="flex gap-1.5">
-          <span className="h-2.5 w-2.5 rounded-full bg-border" />
-          <span className="h-2.5 w-2.5 rounded-full bg-border" />
-          <span className="h-2.5 w-2.5 rounded-full bg-border" />
+          <span className="bg-border h-2.5 w-2.5 rounded-full" />
+          <span className="bg-border h-2.5 w-2.5 rounded-full" />
+          <span className="bg-border h-2.5 w-2.5 rounded-full" />
         </div>
-        <span className="ml-2 font-mono text-xs text-muted-foreground">hello.js</span>
+        <span className="text-muted-foreground ml-2 font-mono text-xs">hello.js</span>
       </div>
 
       {/* Code region — either full Shiki HTML (when done) or partial plain text (while typing) */}
-      <div className="overflow-x-auto bg-card px-5 py-5 font-mono text-sm [&_pre]:!bg-transparent">
+      <div className="bg-card overflow-x-auto px-5 py-5 font-mono text-sm [&_pre]:!bg-transparent">
         {showFullCode ? (
           <div dangerouslySetInnerHTML={{ __html: highlightedHtml }} />
         ) : (
@@ -1435,7 +1452,7 @@ export function CodePanelClient({
       </div>
 
       {/* Action bar */}
-      <div className="flex items-center justify-end border-t border-border px-4 py-2.5">
+      <div className="border-border flex items-center justify-end border-t px-4 py-2.5">
         <button type="button" aria-hidden="true" tabIndex={-1} className={runButtonClass}>
           Run ▸
         </button>
@@ -1443,7 +1460,7 @@ export function CodePanelClient({
 
       {/* Output region — reserves height at all times (prevents CLS) */}
       <div
-        className="min-h-[5.25rem] space-y-1 border-t border-border bg-panel-output px-5 py-4 font-mono text-xs text-muted-foreground transition-opacity duration-300"
+        className="border-border bg-panel-output text-muted-foreground min-h-[5.25rem] space-y-1 border-t px-5 py-4 font-mono text-xs transition-opacity duration-300"
         style={{ opacity: outputVisible ? 1 : 0 }}
         aria-live="off"
       >
@@ -1495,6 +1512,7 @@ npm run dev
 ```
 
 Verify at http://localhost:3000:
+
 - On first load, code types itself in character-by-character over ~2 seconds
 - After typing completes, the Run button pulses briefly
 - Then the output region fades in
@@ -1522,6 +1540,7 @@ git commit -m "feat: animated code panel with scroll-triggered typing"
 ### Task 12: Home page bullets + closer + metadata
 
 **Files:**
+
 - Create: `components/home/bullets.tsx`
 - Create: `components/home/closer.tsx`
 - Modify: `app/(marketing)/page.tsx`
@@ -1550,8 +1569,8 @@ export function Bullets() {
       <ul className="grid gap-8 sm:grid-cols-3">
         {BULLETS.map((b) => (
           <li key={b.title}>
-            <h3 className="font-semibold text-foreground">{b.title}</h3>
-            <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{b.body}</p>
+            <h3 className="text-foreground font-semibold">{b.title}</h3>
+            <p className="text-muted-foreground mt-1 text-sm leading-relaxed">{b.body}</p>
           </li>
         ))}
       </ul>
@@ -1635,6 +1654,7 @@ git commit -m "feat: home page bullets and closer"
 ### Task 13: Pricing page
 
 **Files:**
+
 - Create: `app/(marketing)/pricing/page.tsx`
 - Create: `components/pricing/plan-card.tsx`
 - Create: `components/pricing/faq.tsx`
@@ -1658,19 +1678,19 @@ export function PlanCard({ plan }: { plan: Plan }) {
   return (
     <article
       className={cn(
-        'flex flex-col rounded-xl border border-border bg-card p-6 transition-colors',
+        'border-border bg-card flex flex-col rounded-xl border p-6 transition-colors',
         'hover:border-primary/60'
       )}
     >
       <header>
-        <h3 className="font-mono text-sm uppercase tracking-widest text-muted-foreground">
+        <h3 className="text-muted-foreground font-mono text-sm tracking-widest uppercase">
           {plan.name}
         </h3>
-        <p className="mt-3 text-4xl font-semibold tracking-tight text-foreground">{plan.price}</p>
-        <p className="mt-2 text-sm italic text-muted-foreground">{plan.tagline}</p>
+        <p className="text-foreground mt-3 text-4xl font-semibold tracking-tight">{plan.price}</p>
+        <p className="text-muted-foreground mt-2 text-sm italic">{plan.tagline}</p>
       </header>
-      <div className="mt-6 border-t border-border pt-6">
-        <p className="text-sm text-foreground">{plan.limit}</p>
+      <div className="border-border mt-6 border-t pt-6">
+        <p className="text-foreground text-sm">{plan.limit}</p>
       </div>
       <div className="mt-auto pt-6">
         <Button asChild className="w-full">
@@ -1709,12 +1729,12 @@ const FAQ = [
 export function PricingFaq() {
   return (
     <section className="mx-auto mt-24 max-w-3xl px-6">
-      <h2 className="text-2xl font-semibold tracking-tight text-foreground">Questions</h2>
+      <h2 className="text-foreground text-2xl font-semibold tracking-tight">Questions</h2>
       <div className="mt-8 space-y-8">
         {FAQ.map((item) => (
           <div key={item.q}>
-            <h3 className="font-semibold text-foreground">{item.q}</h3>
-            <p className="mt-2 text-muted-foreground">{item.a}</p>
+            <h3 className="text-foreground font-semibold">{item.q}</h3>
+            <p className="text-muted-foreground mt-2">{item.a}</p>
           </div>
         ))}
       </div>
@@ -1766,8 +1786,10 @@ export default function PricingPage() {
   return (
     <>
       <section className="mx-auto max-w-3xl px-6 pt-20 pb-12 text-center">
-        <h1 className="text-5xl font-semibold tracking-tight text-foreground">Pay for what you run.</h1>
-        <p className="mt-4 text-lg text-muted-foreground">
+        <h1 className="text-foreground text-5xl font-semibold tracking-tight">
+          Pay for what you run.
+        </h1>
+        <p className="text-muted-foreground mt-4 text-lg">
           Every plan includes the full product. Only the ceiling changes.
         </p>
       </section>
@@ -1781,7 +1803,7 @@ export default function PricingPage() {
       </section>
 
       <section className="mx-auto mt-16 max-w-3xl px-6 text-center">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-muted-foreground text-sm">
           Every plan includes: the editor, real HTTPS endpoints, API keys, 30-second execution
           timeout, 128 MB heap, logs, and whatever we ship next week.
         </p>
@@ -1828,6 +1850,7 @@ git commit -m "feat: pricing page with three plans and FAQ"
 ### Task 14: Privacy & Terms stub pages
 
 **Files:**
+
 - Create: `app/(marketing)/privacy/page.tsx`
 - Create: `app/(marketing)/terms/page.tsx`
 
@@ -1845,18 +1868,18 @@ export const metadata = buildMetadata({
 export default function PrivacyPage() {
   return (
     <article className="mx-auto max-w-2xl px-6 py-20">
-      <h1 className="text-4xl font-semibold tracking-tight text-foreground">Privacy</h1>
-      <p className="mt-6 rounded-md border border-primary/30 bg-primary/5 p-4 font-mono text-sm text-primary">
+      <h1 className="text-foreground text-4xl font-semibold tracking-tight">Privacy</h1>
+      <p className="border-primary/30 bg-primary/5 text-primary mt-6 rounded-md border p-4 font-mono text-sm">
         TODO: replace this page with real privacy policy text before launch.
       </p>
-      <div className="mt-8 space-y-4 text-muted-foreground">
+      <div className="text-muted-foreground mt-8 space-y-4">
         <p>
           nvoke collects the minimum information needed to run your functions and bill you for
           executions. We do not run third-party analytics on this marketing site.
         </p>
         <p>
-          The full privacy policy will cover: what data the app stores, how long it is kept, who
-          can access it, and your rights to export or delete it.
+          The full privacy policy will cover: what data the app stores, how long it is kept, who can
+          access it, and your rights to export or delete it.
         </p>
       </div>
     </article>
@@ -1878,11 +1901,11 @@ export const metadata = buildMetadata({
 export default function TermsPage() {
   return (
     <article className="mx-auto max-w-2xl px-6 py-20">
-      <h1 className="text-4xl font-semibold tracking-tight text-foreground">Terms</h1>
-      <p className="mt-6 rounded-md border border-primary/30 bg-primary/5 p-4 font-mono text-sm text-primary">
+      <h1 className="text-foreground text-4xl font-semibold tracking-tight">Terms</h1>
+      <p className="border-primary/30 bg-primary/5 text-primary mt-6 rounded-md border p-4 font-mono text-sm">
         TODO: replace this page with real terms of service text before launch.
       </p>
-      <div className="mt-8 space-y-4 text-muted-foreground">
+      <div className="text-muted-foreground mt-8 space-y-4">
         <p>
           By using nvoke you agree to run reasonable code within the execution limits on your plan.
           We reserve the right to throttle, block, or remove functions that abuse the runner or
@@ -1920,6 +1943,7 @@ git commit -m "feat: privacy and terms stub pages"
 ### Task 15: Blog content loader (`lib/blog.ts`)
 
 **Files:**
+
 - Modify: `package.json` (add `gray-matter`, `zod`)
 - Create: `lib/blog.ts`
 
@@ -2032,6 +2056,7 @@ git commit -m "feat: blog content loader with Zod frontmatter schema"
 ### Task 16: Blog index page
 
 **Files:**
+
 - Create: `app/blog/layout.tsx`
 - Create: `app/blog/page.tsx`
 
@@ -2078,17 +2103,17 @@ export default function BlogIndexPage() {
   return (
     <div className="mx-auto max-w-2xl px-6 py-20">
       <header>
-        <h1 className="text-4xl font-semibold tracking-tight text-foreground">Blog</h1>
-        <p className="mt-3 text-muted-foreground">Writing from the nvoke team.</p>
+        <h1 className="text-foreground text-4xl font-semibold tracking-tight">Blog</h1>
+        <p className="text-muted-foreground mt-3">Writing from the nvoke team.</p>
       </header>
 
       {posts.length === 0 ? (
-        <p className="mt-16 text-muted-foreground">No posts yet.</p>
+        <p className="text-muted-foreground mt-16">No posts yet.</p>
       ) : (
         <ul className="mt-16 space-y-10">
           {posts.map((post) => (
             <li key={post.slug}>
-              <time className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
+              <time className="text-muted-foreground font-mono text-xs tracking-wider uppercase">
                 {formatDate(post.frontmatter.date)}
               </time>
               <h2 className="mt-2 text-2xl font-semibold tracking-tight">
@@ -2096,7 +2121,7 @@ export default function BlogIndexPage() {
                   {post.frontmatter.title}
                 </Link>
               </h2>
-              <p className="mt-1 text-muted-foreground">{post.frontmatter.description}</p>
+              <p className="text-muted-foreground mt-1">{post.frontmatter.description}</p>
             </li>
           ))}
         </ul>
@@ -2132,6 +2157,7 @@ git commit -m "feat: blog index page with post listing"
 ### Task 17: Blog post page with MDX rendering
 
 **Files:**
+
 - Modify: `package.json` (add `next-mdx-remote`)
 - Create: `app/blog/[slug]/page.tsx`
 - Create: `components/mdx/callout.tsx`
@@ -2184,9 +2210,9 @@ type Props = {
 export async function CodeBlock({ children, language = 'javascript', title }: Props) {
   const html = await codeToHtml(children.trim(), { lang: language, theme: 'vesper' });
   return (
-    <figure className="my-6 overflow-hidden rounded-lg border border-border bg-card">
+    <figure className="border-border bg-card my-6 overflow-hidden rounded-lg border">
       {title && (
-        <figcaption className="border-b border-border px-4 py-2 font-mono text-xs text-muted-foreground">
+        <figcaption className="border-border text-muted-foreground border-b px-4 py-2 font-mono text-xs">
           {title}
         </figcaption>
       )}
@@ -2357,21 +2383,21 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   return (
     <article className="mx-auto max-w-2xl px-6 py-20">
       <header className="mb-10">
-        <time className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
+        <time className="text-muted-foreground font-mono text-xs tracking-wider uppercase">
           {formatDate(post.frontmatter.date)}
         </time>
-        <h1 className="mt-3 text-4xl font-semibold leading-tight tracking-tight text-foreground">
+        <h1 className="text-foreground mt-3 text-4xl leading-tight font-semibold tracking-tight">
           {post.frontmatter.title}
         </h1>
-        <p className="mt-3 text-lg text-muted-foreground">{post.frontmatter.description}</p>
+        <p className="text-muted-foreground mt-3 text-lg">{post.frontmatter.description}</p>
       </header>
 
       <div className="prose">
         <MDXRemote source={post.content} components={components} />
       </div>
 
-      <footer className="mt-16 border-t border-border pt-8">
-        <Link href="/blog" className="text-sm text-muted-foreground hover:text-foreground">
+      <footer className="border-border mt-16 border-t pt-8">
+        <Link href="/blog" className="text-muted-foreground hover:text-foreground text-sm">
           ← Back to blog
         </Link>
       </footer>
@@ -2393,6 +2419,7 @@ npm run dev
 ```
 
 Open http://localhost:3000/blog/hello-world. Verify:
+
 - Date, title, description up top
 - Body paragraphs render with warm prose styles
 - "← Back to blog" link at the bottom
@@ -2420,6 +2447,7 @@ git commit -m "feat: blog post rendering with MDX, Shiki, and prose styles"
 ### Task 18: JSON-LD structured data
 
 **Files:**
+
 - Create: `components/site/json-ld.tsx`
 - Modify: `app/layout.tsx` (inject Organization schema site-wide)
 - Modify: `app/blog/page.tsx` (inject Blog schema)
@@ -2555,6 +2583,7 @@ git commit -m "feat: JSON-LD Organization, Blog, and BlogPosting schemas"
 ### Task 19: Dynamic OG images
 
 **Files:**
+
 - Create: `app/og/route.tsx`
 
 - [ ] **Step 1: Write `app/og/route.tsx`**
@@ -2571,61 +2600,59 @@ export async function GET(request: Request) {
   const kind = searchParams.get('kind') ?? 'page';
 
   return new ImageResponse(
-    (
+    <div
+      style={{
+        height: '100%',
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        padding: '80px',
+        background: '#1a1814',
+        color: '#f2efe8',
+        fontFamily: 'sans-serif'
+      }}
+    >
       <div
         style={{
-          height: '100%',
-          width: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          padding: '80px',
-          background: '#1a1814',
-          color: '#f2efe8',
-          fontFamily: 'sans-serif'
+          position: 'absolute',
+          top: 60,
+          left: 80,
+          fontSize: 28,
+          fontWeight: 600,
+          letterSpacing: '-0.02em'
         }}
       >
+        nvoke
+      </div>
+
+      <div
+        style={{
+          display: 'flex',
+          fontSize: title.length > 40 ? 56 : 72,
+          fontWeight: 600,
+          letterSpacing: '-0.03em',
+          lineHeight: 1.05,
+          maxWidth: '85%'
+        }}
+      >
+        {title}
+      </div>
+
+      {kind === 'post' && (
         <div
           style={{
             position: 'absolute',
-            top: 60,
+            bottom: 60,
             left: 80,
-            fontSize: 28,
-            fontWeight: 600,
-            letterSpacing: '-0.02em'
+            fontSize: 22,
+            color: '#a8a296'
           }}
         >
-          nvoke
+          nvoke blog
         </div>
-
-        <div
-          style={{
-            display: 'flex',
-            fontSize: title.length > 40 ? 56 : 72,
-            fontWeight: 600,
-            letterSpacing: '-0.03em',
-            lineHeight: 1.05,
-            maxWidth: '85%'
-          }}
-        >
-          {title}
-        </div>
-
-        {kind === 'post' && (
-          <div
-            style={{
-              position: 'absolute',
-              bottom: 60,
-              left: 80,
-              fontSize: 22,
-              color: '#a8a296'
-            }}
-          >
-            nvoke blog
-          </div>
-        )}
-      </div>
-    ),
+      )}
+    </div>,
     {
       width: 1200,
       height: 630
@@ -2662,6 +2689,7 @@ git commit -m "feat: dynamic OG images via next/og"
 ### Task 20: Sitemap, robots, favicons, manifest
 
 **Files:**
+
 - Create: `app/sitemap.ts`
 - Create: `app/robots.ts`
 - Create: `app/icon.tsx`
@@ -2719,24 +2747,22 @@ export const contentType = 'image/png';
 
 export default function Icon() {
   return new ImageResponse(
-    (
-      <div
-        style={{
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          background: '#1a1814',
-          color: '#8fb89b',
-          fontSize: 22,
-          fontWeight: 700,
-          fontFamily: 'monospace'
-        }}
-      >
-        n
-      </div>
-    ),
+    <div
+      style={{
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        background: '#1a1814',
+        color: '#8fb89b',
+        fontSize: 22,
+        fontWeight: 700,
+        fontFamily: 'monospace'
+      }}
+    >
+      n
+    </div>,
     size
   );
 }
@@ -2752,25 +2778,23 @@ export const contentType = 'image/png';
 
 export default function AppleIcon() {
   return new ImageResponse(
-    (
-      <div
-        style={{
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          background: '#1a1814',
-          color: '#8fb89b',
-          fontSize: 120,
-          fontWeight: 700,
-          fontFamily: 'monospace',
-          borderRadius: 40
-        }}
-      >
-        n
-      </div>
-    ),
+    <div
+      style={{
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        background: '#1a1814',
+        color: '#8fb89b',
+        fontSize: 120,
+        fontWeight: 700,
+        fontFamily: 'monospace',
+        borderRadius: 40
+      }}
+    >
+      n
+    </div>,
     size
   );
 }
@@ -2857,6 +2881,7 @@ npm run build
 ```
 
 Expected: succeeds. Review the output:
+
 - `/` listed as `○ (Static)` or `ƒ (Dynamic)` depending on metadata
 - `/blog` listed
 - `/blog/[slug]` listed with static params (one)
@@ -2871,6 +2896,7 @@ npm run start
 ```
 
 Open http://localhost:3000 and click through:
+
 - Home: hero + code panel animation + bullets + closer + footer
 - Click "Blog" → index loads with the one seed post
 - Click the post → post page with title, body, back-to-blog link
@@ -2885,6 +2911,7 @@ Stop the server.
 - [ ] **Step 6: Verify Lighthouse performance target** (optional but recommended)
 
 Run Lighthouse (via DevTools or CLI) on `http://localhost:3000` in production mode. Targets per spec:
+
 - Performance ≥ 95
 - Accessibility 100
 - Best Practices 100
@@ -2901,10 +2928,12 @@ git push -u origin master
 ```
 
 (If the default branch should be `main`, rename first:
+
 ```bash
 git branch -m master main
 git push -u origin main
 ```
+
 Confirm with the user which branch name they want before pushing.)
 
 Expected: push succeeds to `https://github.com/Mopra/nvoke.run.website`.
@@ -2912,6 +2941,7 @@ Expected: push succeeds to `https://github.com/Mopra/nvoke.run.website`.
 - [ ] **Step 8: Ship checklist (manual, outside this plan)**
 
 After the push:
+
 1. In Vercel dashboard, import the GitHub repo as a new project
 2. Framework preset: Next.js (auto-detected)
 3. Root directory: `./`

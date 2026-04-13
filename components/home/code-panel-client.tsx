@@ -109,21 +109,21 @@ export function CodePanelClient({
   return (
     <figure
       ref={containerRef}
-      className="mx-auto my-12 max-w-3xl overflow-hidden rounded-xl border border-border bg-card"
+      className="border-border bg-card mx-auto my-12 max-w-3xl overflow-hidden rounded-xl border"
       aria-label="Example nvoke function"
     >
       {/* Chrome bar */}
-      <div className="flex items-center gap-2 border-b border-border px-4 py-2.5">
+      <div className="border-border flex items-center gap-2 border-b px-4 py-2.5">
         <div className="flex gap-1.5">
-          <span className="h-2.5 w-2.5 rounded-full bg-border" />
-          <span className="h-2.5 w-2.5 rounded-full bg-border" />
-          <span className="h-2.5 w-2.5 rounded-full bg-border" />
+          <span className="bg-border h-2.5 w-2.5 rounded-full" />
+          <span className="bg-border h-2.5 w-2.5 rounded-full" />
+          <span className="bg-border h-2.5 w-2.5 rounded-full" />
         </div>
-        <span className="ml-2 font-mono text-xs text-muted-foreground">hello.js</span>
+        <span className="text-muted-foreground ml-2 font-mono text-xs">hello.js</span>
       </div>
 
       {/* Code region — either full Shiki HTML (when done) or partial plain text (while typing) */}
-      <div className="min-h-[7rem] overflow-x-auto bg-card px-5 py-5 font-mono text-sm [&_pre]:!bg-transparent">
+      <div className="bg-card min-h-[7rem] overflow-x-auto px-5 py-5 font-mono text-sm [&_pre]:!bg-transparent">
         {showFullCode ? (
           <div dangerouslySetInnerHTML={{ __html: highlightedHtml }} />
         ) : (
@@ -137,7 +137,7 @@ export function CodePanelClient({
       </div>
 
       {/* Action bar */}
-      <div className="flex items-center justify-end border-t border-border px-4 py-2.5">
+      <div className="border-border flex items-center justify-end border-t px-4 py-2.5">
         <button type="button" aria-hidden="true" tabIndex={-1} className={runButtonClass}>
           Run ▸
         </button>
@@ -145,7 +145,7 @@ export function CodePanelClient({
 
       {/* Output region — reserves height at all times (prevents CLS) */}
       <div
-        className="min-h-[5.5rem] space-y-1 border-t border-border bg-panel-output px-5 py-4 font-mono text-xs text-muted-foreground transition-opacity duration-300"
+        className="border-border bg-panel-output text-muted-foreground min-h-[5.5rem] space-y-1 border-t px-5 py-4 font-mono text-xs transition-opacity duration-300"
         style={{ opacity: outputVisible ? 1 : 0 }}
         aria-live="off"
       >

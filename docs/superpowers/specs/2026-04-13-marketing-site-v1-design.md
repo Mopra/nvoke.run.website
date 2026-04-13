@@ -11,6 +11,7 @@
 ## 1. Goals & non-goals
 
 ### Goals
+
 - A marketing site that reads as a developer tool, not a startup landing page: sharp, minimal, opinionated.
 - A blog optimized for SEO and long-form reading, authored in MDX in this repo.
 - An honest pricing page that reflects the three-tier execution-metered model.
@@ -18,6 +19,7 @@
 - Zero third-party runtime scripts. Fast by default (LCP < 1.5s, CLS 0).
 
 ### Non-goals (v1)
+
 - No documentation on this site. Docs stay co-located with the app.
 - No analytics. No tracking. No cookie banner.
 - No light mode. Dark only.
@@ -165,19 +167,19 @@ All motion honors `prefers-reduced-motion: reduce`.
 
 2. **Hero** — centered-left column, max-width ~720px.
    - Optional eyebrow: tiny sage label (e.g. `Developer tool` or `v0.1`)
-   - Headline, display size, tracking-tight. Working draft: *"Write a function. Invoke it. That's the whole tool."*
-   - Sub, one sentence, muted. Working draft: *"nvoke runs small Node.js functions with a real HTTP endpoint. No YAML, no cold-start rituals, no dashboard tour."*
+   - Headline, display size, tracking-tight. Working draft: _"Write a function. Invoke it. That's the whole tool."_
+   - Sub, one sentence, muted. Working draft: _"nvoke runs small Node.js functions with a real HTTP endpoint. No YAML, no cold-start rituals, no dashboard tour."_
    - Two CTAs inline: primary `Open app →` → `app.nvoke.run`; secondary `Read the blog` → `/blog`.
 
 3. **Code panel** — see Section 7. Full-width container, max-width ~960px, centered.
 
 4. **Three bullets** — single row on desktop, stacked on mobile. Each ≤ 12 words.
-   - *Write it in your browser.* Monaco editor, syntax highlighting, no local setup.
-   - *Get a real endpoint.* Every function gets an HTTPS URL and an API key.
-   - *Runs in 30 seconds or less.* Hard timeout, 128MB heap, no surprises.
+   - _Write it in your browser._ Monaco editor, syntax highlighting, no local setup.
+   - _Get a real endpoint._ Every function gets an HTTPS URL and an API key.
+   - _Runs in 30 seconds or less._ Hard timeout, 128MB heap, no surprises.
 
 5. **Closer** — one muted line centered, then one primary button.
-   - Line working draft: *"Built for people who'd rather ship than configure."*
+   - Line working draft: _"Built for people who'd rather ship than configure."_
    - Button: `Open app →`
 
 6. **Footer** — see Section 11.
@@ -211,7 +213,7 @@ Separators between bands use `--border`.
 
 ```js
 export default async function (req) {
-  const { name = "world" } = req.body;
+  const { name = 'world' } = req.body;
   return { message: `Hello, ${name}!` };
 }
 ```
@@ -263,10 +265,10 @@ Posts live as `.mdx` files in `content/blog/`. Flat directory, no subfolders. Fi
 
 ```yaml
 ---
-title: "Why we built nvoke"
-description: "A short sentence for search results and OG cards."
+title: 'Why we built nvoke'
+description: 'A short sentence for search results and OG cards.'
 date: 2026-04-20
-draft: false          # optional, default false
+draft: false # optional, default false
 ---
 ```
 
@@ -316,6 +318,7 @@ No `<Tweet>`, no `<YouTube>`, no `<Codepen>` in v1.
 ### Post page footer
 
 Below the article:
+
 1. Thin divider
 2. "← Back to blog" link
 
@@ -323,7 +326,7 @@ That's it. No related posts, no share buttons, no author bio, no subscribe.
 
 ### Seed content
 
-One placeholder post: `content/blog/hello-world.mdx`. Titled something like *"This is the first post"* with a single paragraph. Replaced by the first real post before or soon after launch. No lorem ipsum.
+One placeholder post: `content/blog/hello-world.mdx`. Titled something like _"This is the first post"_ with a single paragraph. Replaced by the first real post before or soon after launch. No lorem ipsum.
 
 ---
 
@@ -333,8 +336,8 @@ One placeholder post: `content/blog/hello-world.mdx`. Titled something like *"Th
 
 1. Site header
 2. **Page intro**
-   - Headline: *"Pay for what you run."*
-   - Sub: *"Every plan includes the full product. Only the ceiling changes."*
+   - Headline: _"Pay for what you run."_
+   - Sub: _"Every plan includes the full product. Only the ceiling changes."_
 3. **Three pricing cards**, equal width, equal height, aligned baselines. No "Most popular" badge on any card.
 4. **"Included in every plan" row** — a single paragraph, not repeated per card.
 5. **FAQ** — 4 short Q&As, `<h3>` + `<p>`, no accordion.
@@ -343,12 +346,12 @@ One placeholder post: `content/blog/hello-world.mdx`. Titled something like *"Th
 
 ### The three cards
 
-| | Free | Nano | Scale |
-|---|---|---|---|
-| Price | $0 / month | $5 / month | $19 / month |
-| Tagline | *For kicking the tires.* | *For a side project that's actually running.* | *For something people depend on.* |
-| Limit | 100 executions / month | 5,000 executions / month | 50,000 executions / month |
-| CTA | Start free → | Choose Nano → | Choose Scale → |
+|         | Free                     | Nano                                          | Scale                             |
+| ------- | ------------------------ | --------------------------------------------- | --------------------------------- |
+| Price   | $0 / month               | $5 / month                                    | $19 / month                       |
+| Tagline | _For kicking the tires._ | _For a side project that's actually running._ | _For something people depend on._ |
+| Limit   | 100 executions / month   | 5,000 executions / month                      | 50,000 executions / month         |
+| CTA     | Start free →             | Choose Nano →                                 | Choose Scale →                    |
 
 All three CTAs link to `https://app.nvoke.run` (sign-up). No Stripe embed, no credit card fields, no plan picker on this page — the app handles billing.
 

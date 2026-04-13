@@ -31,17 +31,17 @@ export default function BlogIndexPage() {
         }}
       />
       <header>
-        <h1 className="text-4xl font-semibold tracking-tight text-foreground">Blog</h1>
-        <p className="mt-3 text-muted-foreground">Writing from the nvoke team.</p>
+        <h1 className="text-foreground text-4xl font-semibold tracking-tight">Blog</h1>
+        <p className="text-muted-foreground mt-3">Writing from the nvoke team.</p>
       </header>
 
       {posts.length === 0 ? (
-        <p className="mt-16 text-muted-foreground">No posts yet.</p>
+        <p className="text-muted-foreground mt-16">No posts yet.</p>
       ) : (
         <ul className="mt-16 space-y-10">
           {posts.map((post) => (
             <li key={post.slug}>
-              <time className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
+              <time className="text-muted-foreground font-mono text-xs tracking-wider uppercase">
                 {formatDate(post.frontmatter.date)}
               </time>
               <h2 className="mt-2 text-2xl font-semibold tracking-tight">
@@ -49,7 +49,7 @@ export default function BlogIndexPage() {
                   {post.frontmatter.title}
                 </Link>
               </h2>
-              <p className="mt-1 text-muted-foreground">{post.frontmatter.description}</p>
+              <p className="text-muted-foreground mt-1">{post.frontmatter.description}</p>
             </li>
           ))}
         </ul>

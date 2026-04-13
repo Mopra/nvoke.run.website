@@ -14,19 +14,19 @@ export function PlanCard({ plan }: { plan: Plan }) {
   return (
     <article
       className={cn(
-        'flex flex-col rounded-xl border border-border bg-card p-6 transition-colors',
+        'border-border bg-card flex flex-col rounded-xl border p-6 transition-colors',
         'hover:border-primary/60'
       )}
     >
       <header>
-        <h3 className="font-mono text-sm uppercase tracking-widest text-muted-foreground">
+        <h3 className="text-muted-foreground font-mono text-sm tracking-widest uppercase">
           {plan.name}
         </h3>
-        <p className="mt-3 text-4xl font-semibold tracking-tight text-foreground">{plan.price}</p>
-        <p className="mt-2 text-sm italic text-muted-foreground">{plan.tagline}</p>
+        <p className="text-foreground mt-3 text-4xl font-semibold tracking-tight">{plan.price}</p>
+        <p className="text-muted-foreground mt-2 text-sm italic">{plan.tagline}</p>
       </header>
-      <div className="mt-6 border-t border-border pt-6">
-        <p className="text-sm text-foreground">{plan.limit}</p>
+      <div className="border-border mt-6 border-t pt-6">
+        <p className="text-foreground text-sm">{plan.limit}</p>
       </div>
       <div className="mt-auto pt-6">
         <Button asChild className="w-full">

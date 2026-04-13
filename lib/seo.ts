@@ -17,7 +17,9 @@ export function buildMetadata({
   publishedTime
 }: BuildMetadataInput = {}): Metadata {
   const url = `${siteConfig.url}${path}`;
-  const fullTitle = title ? `${title} — ${siteConfig.name}` : `${siteConfig.name} — write a function, invoke it`;
+  const fullTitle = title
+    ? `${title} — ${siteConfig.name}`
+    : `${siteConfig.name} — write a function, invoke it`;
   const ogImage = `${siteConfig.url}/og?title=${encodeURIComponent(title ?? siteConfig.name)}&kind=${type === 'article' ? 'post' : 'page'}`;
 
   return {
