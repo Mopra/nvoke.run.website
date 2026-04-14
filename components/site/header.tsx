@@ -18,9 +18,12 @@ export function Header() {
               {item.label}
             </Link>
           ))}
-          <Button asChild size="sm" className="ml-2">
+          <Button asChild variant="ghost" size="sm" className="ml-2">
+            <a href={siteConfig.appUrl}>Log in</a>
+          </Button>
+          <Button asChild size="sm">
             <a href={siteConfig.appUrl}>
-              Open app <span aria-hidden>→</span>
+              Launch app <span aria-hidden>→</span>
             </a>
           </Button>
         </nav>
