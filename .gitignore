@@ -40,3 +40,6 @@ pnpm-debug.log*
 .vscode/*
 !.vscode/settings.json
 !.vscode/extensions.json
+
+# superpowers working docs (specs, plans, local notes)
+docs/superpowers/
